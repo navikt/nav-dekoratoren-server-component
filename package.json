@@ -1,7 +1,7 @@
 {
     "name": "@navikt/nav-dekoratoren-server-component",
     "version": "0.1.0",
-    "main": "./dist/index.js",
+    "main": "./dist/index.jsx",
     "types": "./dist/index.d.ts",
     "files": [
         "dist"
