@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { Window } from 'happy-dom'
+import { JSDOM } from 'jsdom'
 
 import { getDecoratorUrl } from './urls'
 import { DecoratorFetchProps } from './common-types'
@@ -49,10 +49,7 @@ const fetchDecorator = async (url: string, props: DecoratorFetchProps, retries =
 }
 
 function parseDom(dom: string): DecoratorElements {
-    const window = new Window()
-    const document = window.document
-
-    document.body.innerHTML = dom
+    const { document } = new JSDOM(dom).window
 
     const styles = document.getElementById('styles')?.innerHTML
     if (!styles) {
