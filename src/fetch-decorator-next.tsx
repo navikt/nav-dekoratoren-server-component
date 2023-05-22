@@ -28,6 +28,7 @@ const fetchDecorator = async (url: string, props: DecoratorFetchProps, retries =
         }
 
         try {
+            console.info(`Fetching ${url}...}`)
             const response = await fetch(url, {
                 next: { revalidate: 15 * 60 },
             } as RequestInit & NextFetchRequestConfig)
