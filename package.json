@@ -10,16 +10,13 @@
         "build": "tsc --declaration"
     },
     "peerDependencies": {
-        "jsdom": "22",
         "next": "12 || 13"
     },
     "devDependencies": {
         "@navikt/eslint-config-teamsykmelding": "^1.6.0",
-        "@types/jsdom": "^21.1.1",
         "@types/node": "^18.16.14",
         "@types/react": "^18.2.6",
         "eslint": "^8.41.0",
-        "jsdom": "^22.0.0",
         "next": "^13.4.3",
         "prettier": "^2.8.8",
         "typescript": "^5.0.4"
@@ -31,6 +28,7 @@
     },
     "prettier": "@navikt/eslint-config-teamsykmelding/prettier",
     "dependencies": {
+        "happy-dom": "^9.19.2",
         "html-react-parser": "^3.0.16"
     },
     "packageManager": "yarn@3.5.1"
