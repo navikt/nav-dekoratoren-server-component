@@ -28,7 +28,7 @@ const fetchDecorator = async (url: string, props: DecoratorFetchProps, retries =
         }
 
         try {
-            console.info(`Fetching ${url}...}`)
+            console.info(`Fetching ${url}... (try ${tryCount})`)
             const response = await fetch(url, {
                 next: { revalidate: 15 * 60 },
             } as RequestInit & NextFetchRequestConfig)
@@ -80,7 +80,7 @@ function parseDom(dom: string): DecoratorElements {
     }
 }
 
-export async function fetchDecoratorHtml(props: DecoratorFetchProps): Promise<DecoratorElements> {
+export const fetchDecoratorHtml = async (props: DecoratorFetchProps): Promise<DecoratorElements> => {
     const url: string = getDecoratorUrl(props)
 
     try {
@@ -94,3 +94,4 @@ export async function fetchDecoratorHtml(props: DecoratorFetchProps): Promise<De
         throw e
     }
 }
+
