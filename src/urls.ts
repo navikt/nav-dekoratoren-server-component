@@ -21,7 +21,8 @@ const naisGcpClusters: Record<string, true> = {
     'prod-gcp': true,
 }
 
-const objectToQueryString = (params: Record<string, any>) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const objectToQueryString = (params: Record<string, any>): string =>
     params
         ? Object.entries(params).reduce(
               (acc, [k, v], i) =>
@@ -34,16 +35,20 @@ const objectToQueryString = (params: Record<string, any>) =>
           )
         : ''
 
-const isNaisApp = () =>
-    typeof process !== 'undefined' && process.env.NAIS_CLUSTER_NAME && naisGcpClusters[process.env.NAIS_CLUSTER_NAME]
+const isNaisApp = (): boolean =>
+    Boolean(
+        typeof process !== 'undefined' &&
+            process.env.NAIS_CLUSTER_NAME &&
+            naisGcpClusters[process.env.NAIS_CLUSTER_NAME],
+    )
 
-const getNaisUrl = (env: DecoratorNaisEnv, csr = false, serviceDiscovery = true) => {
+const getNaisUrl = (env: DecoratorNaisEnv, csr = false, serviceDiscovery = true): string => {
     const shouldUseServiceDiscovery = serviceDiscovery && !csr && isNaisApp()
 
     return (shouldUseServiceDiscovery ? serviceUrls[env] : externalUrls[env]) || externalUrls.prod
 }
 
-export const getDecoratorUrl = (props: DecoratorUrlProps) => {
+export const getDecoratorUrl = (props: DecoratorUrlProps): string => {
     const { env, params, csr } = props
     const baseUrl = env === 'localhost' ? props.localUrl : getNaisUrl(env, csr, props.serviceDiscovery)
 

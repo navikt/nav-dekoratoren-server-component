@@ -1,34 +1,25 @@
 import React, { JSX, PropsWithChildren } from 'react'
-import parse from 'html-react-parser'
 
 import { DecoratorFetchProps } from './common-types'
-import { fetchDecoratorHtml } from './fetch-decorator-next'
+import { getDecoratorRsc } from './fetch-decorator-next'
 
 export interface DecoratorProps {
     decoratorProps: DecoratorFetchProps
 }
 
 export async function Decorator({ children, decoratorProps }: PropsWithChildren<DecoratorProps>): Promise<JSX.Element> {
-    const Decorator = await fetchDecoratorHtml(decoratorProps)
+    const { Styles, Header, Footer, Scripts } = await getDecoratorRsc(decoratorProps)
 
     return (
         <>
-            <head>{parse(Decorator.DECORATOR_STYLES, { trim: true })}</head>
+            <head>
+                <Styles />
+            </head>
             <body>
-                <div
-                    suppressHydrationWarning
-                    dangerouslySetInnerHTML={{
-                        __html: Decorator.DECORATOR_HEADER,
-                    }}
-                />
+                <Header />
                 {children}
-                <div
-                    suppressHydrationWarning
-                    dangerouslySetInnerHTML={{
-                        __html: Decorator.DECORATOR_FOOTER,
-                    }}
-                />
-                {parse(Decorator.DECORATOR_SCRIPTS, { trim: true })}
+                <Footer />
+                <Scripts />
             </body>
         </>
     )

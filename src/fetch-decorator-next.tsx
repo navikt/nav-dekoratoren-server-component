@@ -1,16 +1,20 @@
 /* eslint-disable no-console */
 
 import { JSDOM } from 'jsdom'
+import NodeCache from 'node-cache'
+import parse from 'html-react-parser'
+import React, { ReactElement } from 'react'
 
 import { getDecoratorUrl } from './urls'
 import { DecoratorFetchProps } from './common-types'
 
-interface NextFetchRequestConfig {
-    next: {
-        revalidate?: number | false
-        tags?: string[]
-    }
-}
+const SECONDS_PER_MINUTE = 60
+const FIVE_MINUTES_IN_SECONDS = 5 * SECONDS_PER_MINUTE
+
+const cache = new NodeCache({
+    stdTTL: FIVE_MINUTES_IN_SECONDS,
+    checkperiod: SECONDS_PER_MINUTE,
+})
 
 export type DecoratorElements = {
     DECORATOR_STYLES: string
@@ -31,7 +35,7 @@ const fetchDecorator = async (url: string, props: DecoratorFetchProps, retries =
             console.info(`Fetching ${url}... (try ${tryCount})`)
             const response = await fetch(url, {
                 next: { revalidate: 15 * 60 },
-            } as RequestInit & NextFetchRequestConfig)
+            } as RequestInit)
 
             if (!response.ok) {
                 throw new Error(`${response.status} - ${response.statusText}`)
@@ -80,9 +84,7 @@ function parseDom(dom: string): DecoratorElements {
     }
 }
 
-export const fetchDecoratorHtml = async (props: DecoratorFetchProps): Promise<DecoratorElements> => {
-    const url: string = getDecoratorUrl(props)
-
+const fetchDecoratorHtml = async (url: string, props: DecoratorFetchProps): Promise<DecoratorElements> => {
     try {
         const dom = await fetchDecorator(url, props)
         return parseDom(dom)
@@ -95,3 +97,53 @@ export const fetchDecoratorHtml = async (props: DecoratorFetchProps): Promise<De
     }
 }
 
+type ParsedRscComponents = {
+    Styles: () => ReactElement
+    Header: () => ReactElement
+    Footer: () => ReactElement
+    Scripts: () => ReactElement
+}
+
+export async function getDecoratorRsc(props: DecoratorFetchProps): Promise<ParsedRscComponents> {
+    const url: string = getDecoratorUrl(props)
+
+    const cacheData = cache.get<ParsedRscComponents>(url)
+    if (cacheData) {
+        return cacheData
+    }
+
+    const { DECORATOR_STYLES, DECORATOR_HEADER, DECORATOR_FOOTER, DECORATOR_SCRIPTS } = await fetchDecoratorHtml(
+        url,
+        props,
+    )
+
+    const Styles = (): ReactElement => <>{parse(DECORATOR_STYLES, { trim: true })}</>
+    const Header = (): ReactElement => (
+        <div
+            suppressHydrationWarning
+            dangerouslySetInnerHTML={{
+                __html: DECORATOR_HEADER,
+            }}
+        />
+    )
+    const Footer = (): ReactElement => (
+        <div
+            suppressHydrationWarning
+            dangerouslySetInnerHTML={{
+                __html: DECORATOR_FOOTER,
+            }}
+        />
+    )
+    const Scripts = (): ReactElement => <>{parse(DECORATOR_SCRIPTS, { trim: true })}</>
+
+    const rscComponents = {
+        Styles,
+        Header,
+        Footer,
+        Scripts,
+    }
+
+    cache.set(url, rscComponents)
+
+    return rscComponents
+}

@@ -1,3 +1,3 @@
 # nav-dekoratoren-server-component
 
-TODO
+This is super experimental. Don't use. :)
