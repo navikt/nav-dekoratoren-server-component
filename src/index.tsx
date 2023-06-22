@@ -4,6 +4,7 @@ export type {
     DecoratorEnvProps,
     DecoratorFetchProps,
     DecoratorNaisEnv,
+    DecoratorBreadcrumb,
 } from './common-types'
 export type { DecoratorElements } from './fetch-decorator-next'
 export { getDecoratorRsc } from './fetch-decorator-next'
