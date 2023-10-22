@@ -15,7 +15,7 @@
         "next": "12 || 13"
     },
     "devDependencies": {
-        "@navikt/eslint-config-teamsykmelding": "^4.3.0",
+        "@navikt/eslint-config-teamsykmelding": "^4.5.0",
         "@types/jsdom": "^21.1.4",
         "@types/node": "^18.18.6",
         "@types/react": "^18.2.29",
