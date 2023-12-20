@@ -108,7 +108,7 @@ __metadata:
     "@types/node": ^18.18.6
     "@types/react": ^18.2.29
     eslint: ^8.51.0
-    html-react-parser: ^4.2.5
+    html-react-parser: ^5.0.10
     jsdom: ^22.1.0
     next: ^13.5.5
     node-cache: ^5.1.2
@@ -1765,13 +1765,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-dom-parser@npm:5.0.1":
-  version: 5.0.1
-  resolution: "html-dom-parser@npm:5.0.1"
+"html-dom-parser@npm:5.0.5":
+  version: 5.0.5
+  resolution: "html-dom-parser@npm:5.0.5"
   dependencies:
     domhandler: 5.0.3
     htmlparser2: 9.0.0
-  checksum: 9f31b013e9691cb881ef7f5fa22415ca292565b6ad629bc7a23897bb1b5186e6b1c338cef6a7658b3ec633b7eaf2f9d781b7e31c5744778b6f697976f24b8f94
+  checksum: a2169c1f602c62f6e5b05b36493630fc0b0c911a3f0fc4075a28681a8eef7f071e906aa6d2624e5a9b6c09104443723e7538f6228db530c7b88c6f25cb77b5ab
   languageName: node
   linkType: hard
 
@@ -1784,17 +1784,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-react-parser@npm:^4.2.5":
-  version: 4.2.5
-  resolution: "html-react-parser@npm:4.2.5"
+"html-react-parser@npm:^5.0.10":
+  version: 5.0.10
+  resolution: "html-react-parser@npm:5.0.10"
   dependencies:
     domhandler: 5.0.3
-    html-dom-parser: 5.0.1
-    react-property: 2.0.0
-    style-to-js: 1.1.5
+    html-dom-parser: 5.0.5
+    react-property: 2.0.2
+    style-to-js: 1.1.10
   peerDependencies:
     react: 0.14 || 15 || 16 || 17 || 18
-  checksum: 094dcfd3af04c4920df21a844e9b0bf7a3ef29d1c71fd66efd9870c139ad35f40fed122a30a787497ab506565cb71b832b116c17425d6322b08d67eb99f56286
+  checksum: 9a2fe8de614a60ddf19138e7d4b4bf1cab691e5b58853a66cd69efac7c347629671bbdd4bf49c887e2667248da40ab3247a6d49c2195b8560e6db8dea5963fa9
   languageName: node
   linkType: hard
 
@@ -2870,10 +2870,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-property@npm:2.0.0":
-  version: 2.0.0
-  resolution: "react-property@npm:2.0.0"
-  checksum: 8a444df30ef0937689c7968dae2501a0ca523777169f450e1f7ef5beeb855d6509bd058bf612f6ed8f459aa35468335d356e50264492e1938586e59fdb988262
+"react-property@npm:2.0.2":
+  version: 2.0.2
+  resolution: "react-property@npm:2.0.2"
+  checksum: c67fb2590dad9102239b2e574fbc078b472e227b66c3d64e1949426e33889d78c2ac5369cc4c740bb8fe61665505940e39a78d113261ac52410f7538089fe367
   languageName: node
   linkType: hard
 
@@ -3223,21 +3223,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-to-js@npm:1.1.5":
-  version: 1.1.5
-  resolution: "style-to-js@npm:1.1.5"
+"style-to-js@npm:1.1.10":
+  version: 1.1.10
+  resolution: "style-to-js@npm:1.1.10"
   dependencies:
-    style-to-object: 1.0.0
-  checksum: 1516f34d21c632d275dca80f20b5e11fcfc72ae60c3aca6562e44c3767dce2e7672bfaa25bb24765db539ab43448a873fa5415e40de1f0ab9d1235c0e12b8ac4
+    style-to-object: 1.0.5
+  checksum: 2db181d838b0076161f1ac0959e64841efd91ad9f03d80aabd11769e88f7d979a6b4d73c59810dfb47a2e87543fb02693447a03c385dda86d8750e8cf1802d62
   languageName: node
   linkType: hard
 
-"style-to-object@npm:1.0.0":
-  version: 1.0.0
-  resolution: "style-to-object@npm:1.0.0"
+"style-to-object@npm:1.0.5":
+  version: 1.0.5
+  resolution: "style-to-object@npm:1.0.5"
   dependencies:
     inline-style-parser: 0.2.2
-  checksum: 9a224c67be14334dbabef1a95772c5953a96782841c2e22f9e5f43bfd2c9044e8aa8f401ccccd74b373eef9d1a0bfe724b0900f7fc3ac09847e1c3d933c22411
+  checksum: 6201063204b6a94645f81b189452b2ca3e63d61867ec48523f4d52609c81e96176739fa12020d97fbbf023efb57a6f7ec3a15fb3a7fb7eb3ffea0b52b9dd6b8c
   languageName: node
   linkType: hard
 
